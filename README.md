@@ -3,6 +3,16 @@ This is a simple command-line application that determines the student's grades, 
 
 # studentsgradeGenerator Function
 The user inputs the scores and determines whether the grades are defined 
+
+# Question
+Write a program that prompts the user to input student marks. The input should be between 0 and 100. Then output the correct grade:
+
+A > 79, B - 60 to 79, C - 49 to 59, D - 40 to 49, E - less 40.
+
+Solution
+Two prompt routines are used by this program: one asks the user to enter the student's name, and the other requests the student's mark. The computer checks to see if the markers input ranges from 0 to 100 before starting the grading process; if it does, the procedure moves forward. Should the user enter a mark that is invalid, an output indicating such will be displayed. At last, it prints the student's name, mark, and grade after computing their grade using the grading scheme specified in the question. Simply invoke the main function to begin using the software. The user will be prompted to enter the student's name and grades, and the grade, marks, and student name will be output to the console.
+
+
 # Description
 The 'studentgradeGenerator' prompts the user to the student's grades and scores as follows:
 *A:scores are between 79 to 100.
@@ -20,6 +30,13 @@ Inorder to make this project function to run you will need to:
 # speedDetector
 This function determines a given criteria of speed against predefined limits that normally determine whether the speed detected is within the limits highlighted.
 
+# Question
+Write a program that takes as input the speed of a car e.g 80. If the speed is less than 70, it should print “Ok”. Otherwise, for every 5 km/s above the speed limit (70), it should give the driver one demerit point and print the total number of demerit points.
+
+# Solution
+'Speed' is the only argument that the program's function takes. Conditions are used to test the various car speeds. There is a 70 km/h speed restriction. "Ok" is printed when the speed is less than or equal to the speed limit. The application will figure out how many demerit points are earned for every 5 km/s over the speed limit and print that figure after the speed restriction is exceeded. The application writes "License cancelled" if the demerit points surpass 12, which is equivalent to a speed of at least 135 km/s. Simply use the calculateDemeritPoints method to begin using the application. This function computes demerit points and exceeding speed and outputs the number of points based on speed, excess speed, and penalty based on point total to the console.
+
+
 # Description
 
 The `speedDetector` detects a `speed`, which normally represents the speed at which was determined
@@ -33,32 +50,19 @@ To use the `speedDetector` function:
 1. Clone the repository
 2. Call the function with a numeric argument representing the speed in kilometers per hour (km/h).
 
-Example in the Node.js:
-
-```javascript
-// write the function definition
-function speedDetector(speed) {
-    if (speed <= 70) {
-        console.log("Speed: ok");
-    } else {
-        let totalDemeritPoints = Math.floor((speed - 70) / 5);
-
-        if (totalDemeritPoints > 12) {
-            console.log("Points: License Suspended");
-        } else {
-            console.log(`Points: ${totalDemeritPoints}`);
-        }
-    }
-}
-
-// Example uses of the function
-speedDetector(70); // Output: "Speed: ok"
-speedDetector(100); // Output: "Points: License Suspended"
-speedDetector(80); // Output: "Points: 2"
-
 
 # netSalaryCalculator
-The `netSalaryCalculator`calculates the net salary of an employee based on how the basic salary, benefits, and deductions including the PAYE tax, Housing Levy, NHIF, and NSSF.
+The `netSalaryCalculator`calculates the net salary of an employee based on how the basic salary, benefits, and deductions including the PAYE tax, Housing Levy, NHIF, and NSSF. 
+
+ # question
+Write a program whose major task is to calculate an individual’s Net Salary by getting the inputs of basic salary and benefits. Calculate the payee (i.e. Tax), NHIFDeductions, NSSFDeductions, gross salary, and net salary. NB: Use KRA, NHIF, and NSSF values provided in the link below.
+
+https://www.aren.co.ke/payroll/taxrates.htm to an external site.
+
+https://www.kra.go.ke/individual/calculate-tax/calculating-tax/paye to an external site.
+
+Solution
+Using an individual's base pay and benefits—basically, allowances—this tool determines their net compensation. The program's primary function is to calculate gross tax, NHIF and NSSF deductions, gross salary, and net salary. These functions are divided into multiple parts. The program's initial constants are taken from the URLs provided in the question. To traverse through the arrays and obtain the right values required for calculation, loops are employed. Call the calculateNetSalary function to begin using the application. It will ask the user to enter their base pay and benefits before displaying the net salary on the console.
 
 # Description
 The `netSalaryCalculator` does the following steps:
@@ -79,86 +83,5 @@ in order to use `netSalaryCalculator`you should follow the steps below:
 2. Ensure  Node.js is installed.
 3. Call the function `netSalaryCalculator()` in the Node.js.
 
-Example in the Javascript file:
-
-```javascript
-// Include the function definition
-function netSalaryCalculator() {
-    const prompt = require('prompt-sync')();
-
-    //prompt of the basic salary and the benefits
-    let basicSalary = parseFloat(prompt("Please Enter a Valid Basic Salary: "));
-    let benefits = parseFloat(prompt("Key in Benefits: "));
-
-    if (isNaN(basicSalary) || isNaN(benefits) || basicSalary <= 0 || benefits <= 0) {
-        console.log("Entries must be a number and the basic salary should be >= 0");
-        return;
-    }
-
-    // Tax rates and deductions
-
-    //grossSalary
-    const grossSalary = basicSalary + benefits;
-
-    //paye
-    let paye;
-    if (grossSalary <= 24000) {
-        paye = grossSalary * 0.10;
-    } else if (grossSalary <= 32333) {
-        paye = 24000 * 0.10 + (grossSalary - 24000) * 0.25;
-    } else if (grossSalary <= 500000) {
-        paye = 24000 * 0.10 + (32333 - 24000) * 0.25 + (grossSalary - 32333) * 0.30;
-    } else if (grossSalary <= 800000) {
-        paye = 24000 * 0.10 + (32333 - 24000) * 0.25 + (500000 - 32333) * 0.30 + (grossSalary - 500000) * 0.325;
-    } else {
-        paye = 24000 * 0.10 + (32333 - 24000) * 0.25 + (500000 - 32333) * 0.30 + (800000 - 500000) * 0.325 + (grossSalary - 800000) * 0.35;
-    }
-
-    const HousingLevyDeductionsRate = 0.015;
-    const housingLevy = grossSalary * HousingLevyDeductionsRate;
-
-    //nhif 
-    let nhif;
-    if (grossSalary <= 5999) nhif = 150;
-    else if (grossSalary <= 7999) nhif = 300;
-    else if (grossSalary <= 11999) nhif = 400;
-    else if (grossSalary <= 14999) nhif = 500;
-    else if (grossSalary <= 19999) nhif = 600;
-    else if (grossSalary <= 24999) nhif = 750;
-    else if (grossSalary <= 29999) nhif = 850;
-    else if (grossSalary <= 34999) nhif = 900;
-    else if (grossSalary <= 39999) nhif = 950;
-    else if (grossSalary <= 44999) nhif = 1000;
-    else if (grossSalary <= 49999) nhif = 1100;
-    else if (grossSalary <= 59999) nhif = 1200;
-    else if (grossSalary <= 69999) nhif = 1300;
-    else if (grossSalary <= 79999) nhif = 1400;
-    else if (grossSalary <= 89999) nhif = 1500;
-    else if (grossSalary <= 99999) nhif = 1600;
-    else nhif = 1700;
-
-    //NSSF deductions calculations
-    const tier1Limit = 7000;
-    const tier2Limit = 36000;
-    const nssfRate = 0.06;
-    let nssf;
-
-    if (grossSalary <= tier1Limit) {
-        nssf = grossSalary * nssfRate;
-    } else if (grossSalary <= tier2Limit) {
-        nssf = tier1Limit * nssfRate + (grossSalary - tier1Limit) * nssfRate;
-    } else {
-        nssf = tier1Limit * nssfRate + (tier2Limit - tier1Limit) * nssfRate;
-    }
-
-    const netSalary = grossSalary - paye - housingLevy - nhif - nssf;
-
-    console.log(`Paye (Tax): ${paye.toFixed(2)}`);
-    console.log(`Housing Levy: ${housingLevy.toFixed(2)}`);
-    console.log(`NHIF Deduction: ${nhif.toFixed(2)}`);
-    console.log(`NSSF Deduction: ${nssf.toFixed(2)}`);
-    console.log(`Gross Salary: ${grossSalary.toFixed(2)}`);
-    console.log(`Net Salary: ${netSalary.toFixed(2)}`);
-}
-
-netSalaryCalculator();
+# License
+The content of this site is licensed under the MIT license Copyright (c) 2024.
